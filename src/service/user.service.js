@@ -1,5 +1,5 @@
 require('dotenv').config();
-const {User} = require('../model');
+const {User} = require('../../models');
 const {Op, where} = require('sequelize');
 const {v4: uuidv4} = require('uuid');
 const bcrypt = require('bcrypt');
