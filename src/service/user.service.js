@@ -4,7 +4,7 @@ const {Op, where} = require('sequelize');
 const {v4: uuidv4} = require('uuid');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const role = require('../helper/role.helper');
+// const role = require('../helper/role.helper');
 const {validate} = require('../helper/validation.helper');
 const {ResponseError} = require('../error/response-error')
 const {
