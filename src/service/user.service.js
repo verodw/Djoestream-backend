@@ -2,12 +2,13 @@ require('dotenv').config();
 const {User} = require('../../models');
 const {Op, where} = require('sequelize');
 const {v4: uuidv4} = require('uuid');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const {ResponseError} = require('../error/response.error')
 const { createUserSchema, loginUserSchema } = require('../joi/user.schema');
 const { userRepository } = require('../repository/user.repository');
-// const bcrypt = require('bcrypt');
-// const jwt = require('jsonwebtoken');
-// const {validate} = require('../helper/validation.helper');
+const {validate} = require('../joi/joi.validate');
+
 
 const existByUsername = async (username) => {
     const user = await userRepository.findOneByUsername(username);
@@ -45,18 +46,16 @@ const login = async (request) => {
     if (!user) {
         throw new ResponseError(401, "Email or password is incorrect");
     }
-
-    const isPasswordValid = bcrypt.compare(loginRequest.password, user.password);
-    if (!isPasswordValid) {
+    const passwordMatches = bcrypt.compare(loginRequest.password, user.password);
+    if (!passwordMatches) {
         throw new ResponseError(401, "Email or password is incorrect");
     }
 
     const token = jwt.sign({
         "id": user.id,
         "email": user.email,
-        "role": user.role,
         "username": user.username
-    }, process.env.SECRET, {expiresIn: '24h'});
+    }, process.env.SECRET, {expiresIn: '1h'});
 
     return token;
 }
