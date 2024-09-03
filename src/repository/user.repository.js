@@ -7,6 +7,20 @@ const findOneById = async (userId) => {
     });
 }
 
+const findOneByEmail = async (email) => {
+    return await User.findOne({
+        where: {email : email},
+        attributes: ['id', 'email', 'username', 'password']        
+    })
+}
+
+const findOneByUsername = async (username) => {
+    return await User.findOne({
+        where: {username: username},
+        attributes: ['id', 'username']
+    })
+}
+
 const create = async (user) =>{
     return await User.create(user);
 }
@@ -14,5 +28,7 @@ const create = async (user) =>{
 
 module.exports = {
     findOneById,
+    findOneByEmail,
+    findOneByUsername,
     create
 }
