@@ -12,9 +12,7 @@ const create = async (user) =>{
 }
 
 
-
 module.exports = {
     findOneById,
-    create,
-
+    create
 }

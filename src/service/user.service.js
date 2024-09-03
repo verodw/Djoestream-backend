@@ -8,6 +8,7 @@ const {ResponseError} = require('../error/response.error')
 const { createUserSchema, loginUserSchema } = require('../joi/user.schema');
 const { userRepository } = require('../repository/user.repository');
 const {validate} = require('../joi/joi.validate');
+const saltRounds = 10;
 
 
 const existByUsername = async (username) => {
@@ -30,8 +31,8 @@ const register = async (request) => {
     await existByUsername(user.username);
     await existByEmail (user.email);
 
+    user. password = await bcrypt.hash(user.password, saltRounds);
     user.id = uuidv4();
-    user.password = user.password 
     
     const createdUser = await userRepository.create(user);
     return await userRepository.findOneInactiveById(createdUser.id);
