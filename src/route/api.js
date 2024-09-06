@@ -1,6 +1,6 @@
 const {userRouter} = require('./user.route');
 const {commentRouter} = require('./comment.route');
-const {videoRouter} = require('./video.route')
+// const {videoRouter} = require('./video.route')
 
 const express = require("express");
 const router = express.Router();
@@ -12,7 +12,7 @@ router.use('/api/v1/users', userRouter);
 router.use('/api/v1/comments', commentRouter);
 
 //video 
-router.use('/api/v1/videos', videoRouter)
+// router.use('/api/v1/videos', videoRouter)
 
 
 module.exports = {

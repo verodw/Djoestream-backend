@@ -5,12 +5,13 @@ const createCommentSchema = Joi.object({
     videoId: Joi.string().required(),
     content: Joi.string().min(1).max(1000).required(),
     content: Joi.string().min(1).max(1000).required(), 
-    createdAt: Joi.date().iso().default(() => new Date(), 'current date and time'), 
-  });
+    // createdAt: Joi.date().iso().default(() => new Date(), 'current date and time'), 
+  })
+
 
 const updateCommentSchema = Joi.object({
     content: Joi.string().min(1).max(1000), 
-    updatedAt: Joi.date().iso().default(() => new Date(), 'current date and time'),
+    // updatedAt: Joi.date().iso().default(() => new Date(), 'current date and time'),
 });
 
 module.exports = {
