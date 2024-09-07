@@ -14,7 +14,10 @@ const updateCommentSchema = Joi.object({
     // updatedAt: Joi.date().iso().default(() => new Date(), 'current date and time'),
 });
 
+const getCommentValidation = Joi.string().required();
+
 module.exports = {
     createCommentSchema,
-    updateCommentSchema
+    updateCommentSchema,
+    getCommentValidation
 }
