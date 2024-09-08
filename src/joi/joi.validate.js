@@ -7,10 +7,10 @@ const validate = (schema,request) => {
         allowUnknown: true,
         stripUnknown: true
     })
-
     if(result.error) {
         throw new ResponseError(400, result.error.message)
     } 
+    return result.value
 }
 
 module.exports = {
