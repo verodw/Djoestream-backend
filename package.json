@@ -31,7 +31,8 @@
     "pg": "^8.12.0",
     "pg-hstore": "^2.3.4",
     "postgres": "^3.4.4",
-    "sequelize": "^6.37.3"
+    "sequelize": "^6.37.3",
+    "uuidv4": "^6.2.13"
   },
   "devDependencies": {
     "sequelize-cli": "^6.6.2"

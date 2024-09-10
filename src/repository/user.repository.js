@@ -1,10 +1,10 @@
 const { Op } = require('sequelize');
 const { User } = require('../../models');
 
-const findOneById = async (userId) => {
+const findOneById = async (user_id) => {
     return await User.findOne({
-        where: { id: userId },
-        attributes: ['id', 'email', 'username', 'password']
+        where: { user_id: user_id },
+        attributes: ['user_id', 'email', 'username', 'password']
     });
 }
 

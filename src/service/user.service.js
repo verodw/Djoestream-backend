@@ -1,8 +1,9 @@
 // require('dotenv').config();
-const { User } = require('../../models/user');
+const  {User} = require('../../models/user');
+const index = require('../../models/index')
 const { Op, where } = require('sequelize');
-const { v4: uuidv4 } = require('uuid');
 const bcrypt = require('bcrypt');
+const {v4: uuidv4} = require('uuid')
 const jwt = require('jsonwebtoken');
 const { ResponseError } = require('../error/response.error')
 const { createUserSchema, loginUserSchema } = require('../joi/user.schema');
@@ -11,7 +12,7 @@ const { validate } = require('../joi/joi.validate');
 const saltRounds = 10;
 
 require('dotenv').config()
-console.log('>>>>> process.env.SECRET :' + process.env.SECRET)
+
 
 const userExist = async ({ username, email }) => {
 
@@ -66,12 +67,12 @@ const login = async (request) => {
     }
 }
 
-const get = async (userId) => {
-    const user = await userRepository.findOneById(userId);
+
+const get = async (user_id) => {
+    const user = await userRepository.findOneById(user_id);
     if (!user) {
         throw new ResponseError(404, "User not found");
     }
-
     return user;
 }
 
