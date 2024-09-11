@@ -1,0 +1,85 @@
+ 
+//  Error: WHERE parameter "user_id" has invalid "undefined" value
+//  whereItemQuery(key, value, options = {}) {
+//     if (value === void 0) {
+//       throw new Error(`WHERE parameter "${key}" has invalid "undefined" value`);
+//     }
+//     if (typeof key === "string" && key.includes(".") && options.model) {
+//       const keyParts = key.split(".");
+//       if (options.model.rawAttributes[keyParts[0]] && options.model.rawAttributes[keyParts[0]].type instanceof DataTypes.JSON) {
+//         const tmp = {};
+//         const field2 = options.model.rawAttributes[keyParts[0]];
+//         _.set(tmp, keyParts.slice(1), value);
+//         return this.whereItemQuery(field2.field || keyParts[0], tmp, __spreadValues({ field: field2 }, options));
+//       }
+//     }
+//     // const field = this._findField(key, options);
+//     const fieldType = field && field.type || options.type;
+//     const isPlainObject = _.isPlainObject(value);
+//     const isArray = !isPlainObject && Array.isArray(value);
+//     key = this.OperatorsAliasMap && this.OperatorsAliasMap[key] || key;
+//     if (isPlainObject) {
+//       value = this._replaceAliases(value);
+//     }
+//     const valueKeys = isPlainObject && Utils.getComplexKeys(value);
+//     if (key === void 0) {
+//       if (typeof value === "string") {
+//         return value;
+//       }
+//       if (isPlainObject && valueKeys.length === 1) {
+//         return this.whereItemQuery(valueKeys[0], value[valueKeys[0]], options);
+//       }
+//     }
+//     if (value === null) {
+//       const opValue2 = options.bindParam ? "NULL" : this.escape(value, field);
+//       return this._joinKeyValue(key, opValue2, this.OperatorMap[Op.is], options.prefix);
+//     }
+//     if (!value) {
+//       const opValue2 = options.bindParam ? this.format(value, field, options, options.bindParam) : this.escape(value, field);
+//       return this._joinKeyValue(key, opValue2, this.OperatorMap[Op.eq], options.prefix);
+//     }
+//     if (value instanceof Utils.SequelizeMethod && !(key !== void 0 && value instanceof Utils.Fn)) {
+//       return this.handleSequelizeMethod(value);
+//     }
+//     if (key === void 0 && isArray) {
+//       if (Utils.canTreatArrayAsAnd(value)) {
+//         key = Op.and;
+//       } else {
+//         throw new Error("Support for literal replacements in the `where` object has been removed.");
+//       }
+//     }
+//     if (key === Op.or || key === Op.and || key === Op.not) {
+//       return this._whereGroupBind(key, value, options);
+//     }
+//     if (value[Op.or]) {
+//       return this._whereBind(this.OperatorMap[Op.or], key, value[Op.or], options);
+//     }
+//     if (value[Op.and]) {
+//       return this._whereBind(this.OperatorMap[Op.and], key, value[Op.and], options);
+//     }
+//     if (isArray && fieldType instanceof DataTypes.ARRAY) {
+//       const opValue2 = options.bindParam ? this.format(value, field, options, options.bindParam) : this.escape(value, field);
+//       return this._joinKeyValue(key, opValue2, this.OperatorMap[Op.eq], options.prefix);
+//     }
+//     if (isPlainObject && fieldType instanceof DataTypes.JSON && options.json !== false) {
+//       return this._whereJSON(key, value, options);
+//     }
+//     if (isPlainObject && valueKeys.length > 1) {
+//       return this._whereBind(this.OperatorMap[Op.and], key, value, options);
+//     }
+//     if (isArray) {
+//       return this._whereParseSingleValueObject(key, field, Op.in, value, options);
+//     }
+//     if (isPlainObject) {
+//       if (this.OperatorMap[valueKeys[0]]) {
+//         return this._whereParseSingleValueObject(key, field, valueKeys[0], value[valueKeys[0]], options);
+//       }
+//       return this._whereParseSingleValueObject(key, field, this.OperatorMap[Op.eq], value, options);
+//     }
+//     if (key === Op.placeholder) {
+//       const opValue2 = options.bindParam ? this.format(value, field, options, options.bindParam) : this.escape(value, field);
+//       return this._joinKeyValue(this.OperatorMap[key], opValue2, this.OperatorMap[Op.eq], options.prefix);
+//     }
+//     const opValue = options.bindParam ? this.format(value, field, options, options.bindParam) : this.escape(value, field);
+//     return this._joinKeyValue(key, opValue, this.OperatorMap[Op.eq], options.prefix);
+//   }
